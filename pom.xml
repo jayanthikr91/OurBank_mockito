@@ -134,6 +134,8 @@
 	</dependencies>
 	<build>
 		<finalName>OurBank</finalName>
+		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>src/test/java/actionClass</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
