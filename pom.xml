@@ -7,6 +7,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>OurBank_modified Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <properties>
+	<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+	<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+	<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+  </properties>
  <dependencies>
 		<!-- Servlet -->
 		<dependency>
@@ -129,34 +134,37 @@
 	</dependencies>
 	<build>
 		<finalName>OurBank</finalName>
-		
-	</build>
-	<!-- For generating code coverage report -->
-	<reporting>
 		<plugins>
-		<!-- Normally, we take off the dependency report, saves time. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.7</version>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.4.0.905</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
 				<configuration>
-					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+					<destFile>${sonar.jacoco.reportPaths}</destFile>
+					<append>true</append>
 				</configuration>
+				<executions>
+					<execution>
+						<id>agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
-	<!--integrate maven-cobertura-plugin to project site -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<formats>
-						<format>html</format>
-						<format>xml</format>
-					</formats>
-				</configuration>
-			</plugin>
+		
 
 		</plugins>
-	</reporting>
+	</build>
 </project>
