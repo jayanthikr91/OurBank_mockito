@@ -7,10 +7,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>OurBank Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <properties>
-	<sonar.host.url>http://localhost:9000/</sonar.host.url>
-	<sonar.exclusions></sonar.exclusions>
-  </properties>
  <dependencies>
 		<!-- Servlet -->
 		<dependency>
@@ -135,4 +131,32 @@
 		<finalName>OurBank</finalName>
 		
 	</build>
+	<!-- For generating code coverage report -->
+	<reporting>
+		<plugins>
+		<!-- Normally, we take off the dependency report, saves time. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+				</configuration>
+			</plugin>
+
+	<!--integrate maven-cobertura-plugin to project site -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<formats>
+						<format>html</format>
+						<format>xml</format>
+					</formats>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</reporting>
 </project>
