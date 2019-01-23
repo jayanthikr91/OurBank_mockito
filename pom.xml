@@ -135,7 +135,12 @@
 	<build>
 		<finalName>OurBank</finalName>
 		<plugins>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+ 				 <artifactId>maven-surefire-plugin</artifactId>
+  				<version>3.0.0-M3</version>
+ 				 <type>maven-plugin</type>
+			</plugin>	
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
